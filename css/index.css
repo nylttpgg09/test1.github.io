@@ -24,8 +24,11 @@ body {
 
 /* 页面容器 */
 #container {
+  width: 95%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 10px;
+  overflow: hidden;
   border: 1px solid #444;  /* 深灰边框 */
   background: #1d1d1d;     /* 更深的背景色 */
   border-radius: 10px;      /* 边角圆润 */
@@ -194,51 +197,140 @@ body {
 
 /* 图片处理 */
 #Sidebar .item .images img {
-  width: auto;
   max-width: 100%;
   height: auto;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  #Header .header_top {
-    flex-direction: column;
-    text-align: center;
-  }
-  #Header .logo {
-    margin-bottom: 10px;
-  }
-  #Header .nav ul {
-    flex-direction: column;
-    margin-top: 15px;
-  }
-  #Header .nav li {
-    margin-bottom: 10px;
-    border-right: none;
-  }
+/* 响应式布局 */
+@media screen and (max-width: 992px) {
+    #PageBody {
+        flex-direction: column;
+    }
 
-  #PageBody {
-    flex-direction: column;
-  }
-
-  #Sidebar {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  #MainBody {
-    width: 100%;
-  }
+    #Sidebar, #MainBody {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
 
-/* 更小屏幕（如手机） */
-@media (max-width: 480px) {
-  body {
-    font-size: 12px;
-  }
-  .btn {
+@media screen and (max-width: 768px) {
+    #Header .header_top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #Header .nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #MainBody .item {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 13px;
+    }
+
+    #Header .nav a {
+        font-size: 16px;
+    }
+}
+
+/* 图片容器优化 */
+.img {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.img:hover {
+    transform: translateY(-5px);
+}
+
+/* 图片悬停效果 */
+.img img {
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.img img:hover {
+    transform: scale(1.05);
+}
+
+/* 优化导航栏交互 */
+#Header .nav a {
+    position: relative;
+    padding-bottom: 3px;
+}
+
+#Header .nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f8b400;
+    transition: width 0.3s ease;
+}
+
+#Header .nav a:hover::after {
     width: 100%;
-  }
+}
+
+/* 优化按钮交互 */
+.btn {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 优化卡片效果 */
+#MainBody .item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#MainBody .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 加载动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#MainBody .item {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* 优化搜索框 */
+#Sidebar .form input {
+    transition: all 0.3s ease;
+}
+
+#Sidebar .form input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(248, 180, 0, 0.5);
+    border-color: #f8b400;
 }
